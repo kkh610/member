@@ -31,14 +31,22 @@ public class login1 extends AppCompatActivity {
 
 
     }
-    public void login(View v){
+    
+  public void login(View v) {
+        if (id.length() > 0 && pw.length() > 0){
         String a = id.getText().toString();
         String b = pw.getText().toString();
-        Cursor cursor = db.rawQuery("SELECT _id,password FROM 회원 WHERE _id = '" + a + "' AND password = '" + b + "';",null);
-        if(cursor.getCount() > 0){
-            Toast.makeText(this,"로그인되었습니다.",Toast.LENGTH_LONG).show();
+            Cursor cursor = db.rawQuery("SELECT _id,password FROM 회원 WHERE _id = '" + a + "' AND password = '" + b + "';", null);
+            if (cursor.getCount() > 0) {
+                Toast.makeText(this, "로그인되었습니다.", Toast.LENGTH_LONG).show();
+            }
+            if(cursor.getCount() == 0){
+                Toast.makeText(this, "회원이 아닙니다.", Toast.LENGTH_LONG).show();
+            }
         }
-    }
+        else Toast.makeText(this, "회원정보를 입력해주세요", Toast.LENGTH_LONG).show();
+        }
+    
     public void member(View v){
         Intent intent = new Intent(login1.this,MainActivity.class);
         startActivity(intent);
