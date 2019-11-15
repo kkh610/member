@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
     public void member(View view) {
         String id1 = id.getText().toString();
         String password1 = password.getText().toString();
+        String password2 = password_1.getText().toString();
         String name1 = name.getText().toString();
         String bir1 = bir.getText().toString();
         if (men.isChecked())
@@ -85,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                     genre +=  checkBoxes[i].getText().toString() +",";
             }
         }
-        if (password_1 != password) {
+       if (!password1.equals(password2)) {
             Toast.makeText(this, "비밀번호를 다시 확인해주세요", Toast.LENGTH_LONG).show();
         } else {
          db.execSQL("INSERT INTO 회원 VALUES ('"+ id1 + "','" + password1 + "','" + name1 + "','" + bir1 + "','"  + gender + "','" +  genre + "')");
