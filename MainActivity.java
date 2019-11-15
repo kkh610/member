@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void member(View view) {
+        if(id.length() > 0 && password.length() > 0 && password_1.length() > 0 && name.length() > 0){
         String id1 = id.getText().toString();
         String password1 = password.getText().toString();
         String password2 = password_1.getText().toString();
@@ -83,16 +84,25 @@ public class MainActivity extends AppCompatActivity {
                 if (i == 7)
                     genre += checkBoxes[i].getText().toString();
                 else
-                    genre +=  checkBoxes[i].getText().toString() +",";
+                    genre += checkBoxes[i].getText().toString() + ",";
             }
         }
-       if (!password1.equals(password2)) {
-            Toast.makeText(this, "비밀번호를 다시 확인해주세요", Toast.LENGTH_LONG).show();
-        } else {
-         db.execSQL("INSERT INTO 회원 VALUES ('"+ id1 + "','" + password1 + "','" + name1 + "','" + bir1 + "','"  + gender + "','" +  genre + "')");
-            Toast.makeText(this,"가입되었습니다.",Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(MainActivity.this,login1.class);
-            startActivity(intent);
+            if (!password1.equals(password2)) {
+                Toast.makeText(this, "비밀번호를 다시 확인해주세요", Toast.LENGTH_LONG).show();
+            } else {
+                db.execSQL("INSERT INTO 회원 VALUES ('" + id1 + "','" + password1 + "','" + name1 + "','" + bir1 + "','" + gender + "','" + genre + "')");
+                Toast.makeText(this, "가입되었습니다.", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(MainActivity.this, login1.class);
+                startActivity(intent);
+            }
+        }
+        else {
+            Toast.makeText(this, "필수사항을 모두 입력해주세요", Toast.LENGTH_LONG).show();
         }
     }
-}
+    
+    
+      public void cancel(View v){
+        Intent intent = new Intent(MainActivity.this,login1.class);
+        startActivity(intent);
+    }
